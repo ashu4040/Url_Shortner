@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://url-shortner-frontend-a2zw.onrender.com", // your React app
+    origin: "http://localhost:5173", // your React app
     credentials: true, // 👈 this allows cookies to be sent
   })
 );
