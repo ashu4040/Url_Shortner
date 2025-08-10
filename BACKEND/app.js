@@ -11,16 +11,15 @@ import cors from "cors";
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser";
 
-dotenv.config(); // loads from default .env file
+dotenv.config();
 
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", // your local React frontend
-  "https://url-shortner-gamma-five.vercel.app", // replace with your actual deployed frontend URL
+  "http://localhost:5173",
+  "https://url-shortner-gamma-five.vercel.app",
 ];
 
-// CORS middleware
 app.use(
   cors({
     origin: (origin, callback) => {
