@@ -17,7 +17,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://url-shortner-gamma-five.vercel.app",
+  "https://url-shortner-seven-zeta-23.vercel.app/",
 ];
 
 app.use(
