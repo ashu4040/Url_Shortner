@@ -11,14 +11,26 @@ import cors from "cors";
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser";
 
-dotenv.config("./.env");
+dotenv.config(); // loads from default .env file
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173", // your local React frontend
+  "https://url-shortner-gamma-five.vercel.app", // replace with your actual deployed frontend URL
+];
+
+// CORS middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // your React app
-    credentials: true, // 👈 this allows cookies to be sent
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
 
@@ -35,9 +47,15 @@ app.get("/:id", redirectFromShortUrl);
 
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  connectDB();
-  console.log("Server is running on http://localhost:3000");
-});
+const PORT = process.env.PORT || 3000;
 
-// GET - Redirection
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+    process.exit(1);
+  });
