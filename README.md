@@ -18,7 +18,7 @@ A simple and efficient URL shortening web application that converts long URLs in
 
 ## Demo
 
-https://url-shortner-frontend-a2zw.onrender.com/
+https://url-shortner-seven-zeta-23.vercel.app/
 
 ---
 
